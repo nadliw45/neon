@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk 2077</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a12;
+            color: #00f3ff;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            animation: glitch 3s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 #ff00c1, -0.05em -0.05em 0 #00fff9; }
+            14% { text-shadow: 0.05em 0 0 #ff00c1, -0.05em -0.05em 0 #00fff9; }
+            15% { text-shadow: -0.05em -0.05em 0 #ff00c1, 0.025em 0.025em 0 #00fff9; }
+            49% { text-shadow: -0.05em -0.05em 0 #ff00c1, 0.025em 0.025em 0 #00fff9; }
+            50% { text-shadow: 0.05em 0.025em 0 #ff00c1, 0.025em -0.05em 0 #00fff9; }
+            99% { text-shadow: 0.05em 0.025em 0 #ff00c1, 0.025em -0.05em 0 #00fff9; }
+            100% { text-shadow: -0.05em 0 0 #ff00c1, 0.025em -0.025em 0 #00fff9; }
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: rgba(10, 10, 18, 0.95);
+            padding: 1rem;
+            border-bottom: 2px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #00f3ff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #ff00c1;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(45deg, #0a0a12 0%, #1a1a2a 100%);
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px #00f3ff;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1a1a2a;
+            padding: 2rem;
+            border: 1px solid #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Neon Button */
+        .btn-neon {
+            background: none;
+            border: 2px solid #00f3ff;
+            color: #00f3ff;
+            padding: 1rem 2rem;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .btn-neon:hover {
+            background: #00f3ff;
+            color: #0a0a12;
+            box-shadow: 0 0 25px #00f3ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <nav>
+                <h1 class="glitch">CYBERPUNK</h1>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#tech">Tech</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <h1>WELCOME TO THE FUTURE</h1>
+            <button class="btn-neon">ENTER NEURAL NET</button>
+        </div>
+    </section>
+
+    <main class="grid">
+        <div class="card">
+            <h2>Cyber Enhancements</h2>
+            <p>Upgrade your body with the latest neural implants and cyberware.</p>
+        </div>
+        <div class="card">
+            <h2>Neural Interface</h2>
+            <p>Direct brain-computer interface for ultimate control.</p>
+        </div>
+        <div class="card">
+            <h2>Holo Display</h2>
+            <p>Advanced holographic projection technology.</p>
+        </div>
+    </main>
+
+    <script>
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = 'rgba(10, 10, 18, 0.95)';
+            } else {
+                nav.style.backgroundColor = 'rgba(10, 10, 18, 0.7)';
+            }
+        });
+
+        // Add random glitch effect
+        setInterval(() => {
+            const glitchElements = document.querySelectorAll('.glitch');
+            glitchElements.forEach(element => {
+                element.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+            });
+        }, 100);
+    </script>
+</body>
+</html>
