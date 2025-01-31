@@ -1,39 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Book Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modern minimalist book portfolio website with social links and contact form. Designed for authors and book enthusiasts.">
+  <meta name="keywords" content="book portfolio, author website, modern design, minimalism, SEO friendly">
+  <meta name="author" content="Your Name">
+  <title>Book Portfolio | Modern Minimalist Design</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* Header Section */
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    /* Book Portfolio Section */
+    .portfolio {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .book-card {
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      width: 250px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .book-card:hover {
+      transform: scale(1.05);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .book-card h3 {
+      font-size: 1.2rem;
+      margin: 10px;
+      text-align: center;
+    }
+
+    .book-card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 10px;
+      text-align: center;
+    }
+
+    /* Social Links */
+    .social-links {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #00ffcc;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #111;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+
+    .contact-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .contact-form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #00cc99;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>My Book Portfolio</h1>
-        <button id="darkModeToggle">🌙</button>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="books.html">Books</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
 
-    <section>
-        <h2>Welcome to My Book Portfolio</h2>
-        <p>Explore my collection of books and get to know more about my writing journey.</p>
-    </section>
+  <!-- Header -->
+  <header>
+    <h1>My Book Portfolio</h1>
+    <p>A modern minimalist showcase of my books and writing journey.</p>
+  </header>
 
-    <footer>
-        <p>Connect with me: 
-            <a href="#" class="social"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social"><i class="fab fa-linkedin"></i></a>
-        </p>
-    </footer>
+  <!-- Book Portfolio -->
+  <section class="portfolio">
+    <div class="book-card">
+      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
+      <h3>Book Title 1</h3>
+      <p>A short description about the book.</p>
+    </div>
+    <div class="book-card">
+      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
+      <h3>Book Title 2</h3>
+      <p>A short description about the book.</p>
+    </div>
+    <div class="book-card">
+      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
+      <h3>Book Title 3</h3>
+      <p>A short description about the book.</p>
+    </div>
+  </section>
+
+  <!-- Social Links -->
+  <div class="social-links">
+    <a href="https://twitter.com" target="_blank">𝕏</a>
+    <a href="https://instagram.com" target="_blank">📸</a>
+    <a href="https://linkedin.com" target="_blank">.LinkedIn</a>
+  </div>
+
+  <!-- Contact Form -->
+  <section class="contact-form">
+    <h2>Contact Me</h2>
+    <form action="#" method="POST">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 My Book Portfolio. All rights reserved. | Designed with ❤️ by <a href="#">Your Name</a>.</p>
+  </footer>
+
 </body>
 </html>
