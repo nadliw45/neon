@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Modern minimalist book portfolio website with responsive header, social links, and contact form. Designed for authors and book enthusiasts.">
-  <meta name="keywords" content="book portfolio, author website, modern design, minimalism, SEO friendly">
+  <meta name="description" content="Modern minimalist book portfolio website with blog feature, social links, and contact form. Designed for authors and book enthusiasts.">
+  <meta name="keywords" content="book portfolio, author website, modern design, minimalism, SEO friendly, blog">
   <meta name="author" content="Your Name">
   <title>Book Portfolio | Modern Minimalist Design</title>
   <style>
@@ -96,81 +96,73 @@
       }
     }
 
-    /* Book Portfolio Section */
-    .portfolio {
+    /* Blog Section */
+    .blog-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .blog-section h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .blog-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
       gap: 20px;
     }
 
-    .book-card {
+    .blog-card {
       background-color: #111;
       border: 1px solid #333;
       border-radius: 10px;
-      width: 250px;
+      width: 300px;
       overflow: hidden;
       transition: transform 0.3s ease;
     }
 
-    .book-card:hover {
+    .blog-card:hover {
       transform: scale(1.05);
     }
 
-    .book-card img {
+    .blog-card img {
       width: 100%;
       height: auto;
     }
 
-    .book-card h3 {
+    .blog-card h3 {
       font-size: 1.2rem;
       margin: 10px;
       text-align: center;
     }
 
-    .book-card p {
+    .blog-card p {
       font-size: 0.9rem;
       color: #ccc;
       margin: 10px;
       text-align: center;
     }
 
-    /* Social Links */
-    .social-links {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .social-links a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.5rem;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-    }
-
-    .social-links a:hover {
-      color: #00ffcc;
-    }
-
-    /* Contact Form */
-    .contact-form {
+    /* Admin Panel */
+    .admin-panel {
+      display: none;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 40px auto;
       padding: 20px;
       background-color: #111;
-      border-radius: 10px;
       border: 1px solid #333;
+      border-radius: 10px;
     }
 
-    .contact-form h2 {
+    .admin-panel h2 {
       text-align: center;
       margin-bottom: 20px;
     }
 
-    .contact-form input,
-    .contact-form textarea {
+    .admin-panel input,
+    .admin-panel textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
@@ -180,7 +172,7 @@
       color: #fff;
     }
 
-    .contact-form button {
+    .admin-panel button {
       display: block;
       width: 100%;
       padding: 10px;
@@ -193,7 +185,7 @@
       transition: background-color 0.3s ease;
     }
 
-    .contact-form button:hover {
+    .admin-panel button:hover {
       background-color: #00cc99;
     }
 
@@ -223,38 +215,26 @@
     <nav>
       <ul>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
     <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
   </header>
 
-  <!-- Book Portfolio -->
-  <section id="portfolio" class="portfolio">
-    <div class="book-card">
-      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
-      <h3>Book Title 1</h3>
-      <p>A short description about the book.</p>
-    </div>
-    <div class="book-card">
-      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
-      <h3>Book Title 2</h3>
-      <p>A short description about the book.</p>
-    </div>
-    <div class="book-card">
-      <img src="https://via.placeholder.com/250x350" alt="Book Cover">
-      <h3>Book Title 3</h3>
-      <p>A short description about the book.</p>
-    </div>
+  <!-- Blog Section -->
+  <section id="blog" class="blog-section">
+    <h2>My Blog</h2>
+    <div class="blog-list" id="blogList"></div>
   </section>
 
-  <!-- Social Links -->
-  <div class="social-links">
-    <a href="https://twitter.com" target="_blank">𝕏</a>
-    <a href="https://instagram.com" target="_blank">📸</a>
-    <a href="https://linkedin.com" target="_blank">.LinkedIn</a>
-  </div>
+  <!-- Admin Panel -->
+  <section class="admin-panel" id="adminPanel">
+    <h2>Add New Blog Post</h2>
+    <input type="text" id="blogTitle" placeholder="Blog Title" required>
+    <textarea id="blogContent" rows="5" placeholder="Write your blog post here..." required></textarea>
+    <button onclick="addBlog()">Publish</button>
+  </section>
 
   <!-- Contact Form -->
   <section id="contact" class="contact-form">
@@ -273,10 +253,55 @@
   </footer>
 
   <script>
+    // Toggle Menu
     function toggleMenu() {
       const nav = document.querySelector('header nav');
       nav.classList.toggle('active');
     }
+
+    // Blog Data (Local Storage)
+    let blogs = JSON.parse(localStorage.getItem('blogs')) || [];
+
+    // Display Blogs
+    function displayBlogs() {
+      const blogList = document.getElementById('blogList');
+      blogList.innerHTML = '';
+      blogs.forEach((blog, index) => {
+        const blogCard = `
+          <div class="blog-card">
+            <h3>${blog.title}</h3>
+            <p>${blog.content.substring(0, 100)}...</p>
+          </div>
+        `;
+        blogList.innerHTML += blogCard;
+      });
+    }
+
+    // Add New Blog
+    function addBlog() {
+      const title = document.getElementById('blogTitle').value;
+      const content = document.getElementById('blogContent').value;
+
+      if (title && content) {
+        const newBlog = { title, content };
+        blogs.push(newBlog);
+        localStorage.setItem('blogs', JSON.stringify(blogs));
+        displayBlogs();
+        document.getElementById('blogTitle').value = '';
+        document.getElementById('blogContent').value = '';
+      } else {
+        alert('Please fill in both title and content.');
+      }
+    }
+
+    // Show Admin Panel
+    const isAdmin = confirm('Are you an admin? Click OK to access the admin panel.');
+    if (isAdmin) {
+      document.getElementById('adminPanel').style.display = 'block';
+    }
+
+    // Initial Display
+    displayBlogs();
   </script>
 
 </body>
