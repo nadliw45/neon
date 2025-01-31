@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Modern minimalist book portfolio website with social links and contact form. Designed for authors and book enthusiasts.">
+  <meta name="description" content="Modern minimalist book portfolio website with responsive header, social links, and contact form. Designed for authors and book enthusiasts.">
   <meta name="keywords" content="book portfolio, author website, modern design, minimalism, SEO friendly">
   <meta name="author" content="Your Name">
   <title>Book Portfolio | Modern Minimalist Design</title>
@@ -24,18 +24,76 @@
 
     /* Header Section */
     header {
-      text-align: center;
-      padding: 50px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #000;
+      border-bottom: 1px solid #333;
     }
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
-    header p {
+    header nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      color: #fff;
       font-size: 1rem;
-      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+      color: #00ffcc;
+    }
+
+    /* Responsive Header */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #111;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        border-bottom: 1px solid #333;
+      }
+
+      header nav.active {
+        display: flex;
+      }
+
+      header nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header nav ul li {
+        margin: 10px 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
     }
 
     /* Book Portfolio Section */
@@ -161,12 +219,19 @@
 
   <!-- Header -->
   <header>
-    <h1>My Book Portfolio</h1>
-    <p>A modern minimalist showcase of my books and writing journey.</p>
+    <div class="logo">Book Portfolio</div>
+    <nav>
+      <ul>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
   </header>
 
   <!-- Book Portfolio -->
-  <section class="portfolio">
+  <section id="portfolio" class="portfolio">
     <div class="book-card">
       <img src="https://via.placeholder.com/250x350" alt="Book Cover">
       <h3>Book Title 1</h3>
@@ -192,7 +257,7 @@
   </div>
 
   <!-- Contact Form -->
-  <section class="contact-form">
+  <section id="contact" class="contact-form">
     <h2>Contact Me</h2>
     <form action="#" method="POST">
       <input type="text" placeholder="Your Name" required>
@@ -206,6 +271,13 @@
   <footer>
     <p>&copy; 2023 My Book Portfolio. All rights reserved. | Designed with ❤️ by <a href="#">Your Name</a>.</p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('header nav');
+      nav.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>
