@@ -76,6 +76,16 @@
             padding: 20px;
             border: 1px solid var(--text-color);
             border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .book-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
         }
 
         .contact-form {
@@ -143,14 +153,17 @@
             <h2>Koleksi Buku</h2>
             <div class="book-grid">
                 <div class="book-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Sampul Buku 1" class="book-image">
                     <h3>Judul Buku 1</h3>
                     <p>Deskripsi singkat buku pertama...</p>
                 </div>
                 <div class="book-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Sampul Buku 2" class="book-image">
                     <h3>Judul Buku 2</h3>
                     <p>Deskripsi singkat buku kedua...</p>
                 </div>
                 <div class="book-card">
+                    <img src="https://via.placeholder.com/250x200" alt="Sampul Buku 3" class="book-image">
                     <h3>Judul Buku 3</h3>
                     <p>Deskripsi singkat buku ketiga...</p>
                 </div>
@@ -175,7 +188,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Portofolio Buku. All rights reserved.</p>
+        <p>© 2025 Portofolio Buku. All rights reserved.</p>
     </footer>
 
     <script>
