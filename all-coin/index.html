@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (meta tags dan CSS sebelumnya tetap sama) ... -->
+</head>
+<body>
+    <!-- ... (header dan footer tetap sama) ... -->
+
+    <script>
+        // Fungsi untuk mengambil 100 koin teratas
+        async function fetchTopCoins() {
+            try {
+                const response = await fetch(
+                    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
+                );
+                
+                const data = await response.json();
+                renderCoins(data);
+            } catch (error) {
+                console.error('Error:', error);
+                cryptoGrid.innerHTML = '<div class="error">Gagal memuat data blockchain</div>';
+            }
+        }
+
+        // Fungsi render koin
+        function renderCoins(coins) {
+            cryptoGrid.innerHTML = coins.map((coin, index) => `
+                <div class="card">
+                    <div class="coin-header">
+                        <span class="rank">#${index + 1}</span>
+                        <img src="${coin.image}" class="coin-logo" alt="${coin.name}">
+                        <div>
+                            <h3>${coin.name}</h3>
+                            <span>${coin.symbol.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <div class="price">$${coin.current_price.toLocaleString()}</div>
+                    <div class="market-cap">MCap: $${coin.market_cap.toLocaleString().slice(0, -6)}M</div>
+                    <div class="change ${coin.price_change_percentage_24h >= 0 ? 'up' : 'down'}">
+                        ${coin.price_change_percentage_24h.toFixed(2)}%
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Interval update
+        let isUpdating = false;
+        async function updateData() {
+            if(!isUpdating) {
+                isUpdating = true;
+                await fetchTopCoins();
+                isUpdating = false;
+            }
+        }
+
+        // PWA dan inisialisasi
+        window.addEventListener('load', () => {
+            updateData();
+            setInterval(updateData, 30000);
+        });
+    </script>
+</body>
+</html>
