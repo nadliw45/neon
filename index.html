@@ -8,24 +8,42 @@
     <style>
         /* ... (CSS sebelumnya tetap sama) ... */
 
-        .status {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 0.8rem;
-            color: #00ff88;
-            opacity: 0.8;
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .refresh-button {
+            background: linear-gradient(45deg, #00ff88, #00b4d8);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: transform 0.2s;
         }
 
-        .refresh-indicator {
-            width: 12px;
-            height: 12px;
-            border: 2px solid #00ff88;
-            border-radius: 50%;
-            border-top-color: transparent;
+        .refresh-button:hover {
+            transform: scale(1.05);
+        }
+
+        .refresh-button:active {
+            transform: scale(0.95);
+        }
+
+        .refresh-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+
+        .refresh-button.loading .refresh-icon {
             animation: spin 1s linear infinite;
         }
 
@@ -44,29 +62,36 @@
 <body>
     <div class="container">
         <header>
-            <h1>Crypto Live Tracker</h1>
-            <div class="status">
-                <div class="refresh-indicator"></div>
-                <span>Real-time Updates</span>
+            <div class="header-content">
+                <h1>Crypto Live Tracker</h1>
+                <div class="status">
+                    <button class="refresh-button" id="refresh-button">
+                        <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
             </div>
+            <div class="time-update" id="time-update"></div>
         </header>
         
         <div class="grid" id="crypto-grid">
             <div class="loading">Loading cryptocurrency data...</div>
         </div>
-        <div class="time-update" id="time-update"></div>
     </div>
 
     <script>
         const cryptocurrencies = ['bitcoin', 'ethereum', 'binancecoin', 'solana', 'cardano', 'ripple'];
         const cryptoGrid = document.getElementById('crypto-grid');
         const timeUpdate = document.getElementById('time-update');
-
+        const refreshButton = document.getElementById('refresh-button');
         let isUpdating = false;
 
         async function fetchCryptoPrices() {
             if(isUpdating) return;
             isUpdating = true;
+            refreshButton.classList.add('loading');
             
             try {
                 const response = await fetch(
@@ -116,7 +141,6 @@
                     cryptoGrid.appendChild(card);
                 });
 
-                // Update waktu terakhir refresh
                 timeUpdate.textContent = `Last update: ${new Date().toLocaleTimeString()}`;
                 
             } catch (error) {
@@ -124,6 +148,7 @@
                 console.error('Error:', error);
             } finally {
                 isUpdating = false;
+                refreshButton.classList.remove('loading');
             }
         }
 
@@ -133,8 +158,8 @@
         // Auto-refresh every 15 seconds
         const refreshInterval = setInterval(fetchCryptoPrices, 15000);
 
-        // Optional: Force refresh dengan klik
-        document.addEventListener('click', fetchCryptoPrices);
+        // Manual refresh dengan tombol
+        refreshButton.addEventListener('click', fetchCryptoPrices);
     </script>
 </body>
 </html>
