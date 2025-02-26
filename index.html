@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoLive - Real Time Tracker</title>
+    <title>CryptoLive - Real-Time Cryptocurrency Prices</title>
+    <meta name="description" content="Track real-time prices of Bitcoin, Ethereum, and other major cryptocurrencies with live updates every 30 seconds">
+    <meta name="keywords" content="bitcoin price, ethereum price, crypto tracker, live cryptocurrency prices">
+    <meta name="author" content="CryptoLive">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CryptoLive - Live Crypto Prices Tracker">
+    <meta property="og:description" content="Real-time cryptocurrency prices with auto-refresh and PWA support">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -26,33 +41,23 @@
             background: var(--background);
             color: var(--text);
             min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header */
         .main-header {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
+            background: var(--surface);
+            padding: 1rem;
             border-bottom: 1px solid var(--border);
         }
 
         .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .logo {
@@ -63,129 +68,12 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .social-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .social-link svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-        }
-
-        .social-link:hover {
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 80px;
-        }
-
-        /* Crypto Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem 0;
-        }
-
-        .card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.2s;
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .coin-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .coin-logo {
-            width: 40px;
-            height: 40px;
-            margin-right: 1rem;
-        }
-
-        .coin-name {
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-
-        .coin-symbol {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .price {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-
-        .price::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-        }
-
-        .change {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .change.up {
-            background: rgba(0, 255, 136, 0.1);
-            color: var(--primary);
-        }
-
-        .change.down {
-            background: rgba(255, 68, 68, 0.1);
-            color: #ff4444;
-        }
-
-        .refresh-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
         .refresh-button {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
             color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -198,31 +86,131 @@
             color: var(--primary);
         }
 
-        .time-update {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        @media (max-width: 768px) {
-            .social-links {
-                gap: 1rem;
-            }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
 
-            .social-link span {
-                display: none;
-            }
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
 
-            .nav-container {
-                padding: 0.8rem;
-            }
+        .card:hover {
+            transform: translateY(-3px);
+        }
 
-            .coin-name {
-                font-size: 1rem;
-            }
+        .coin-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-            .price {
-                font-size: 1.4rem;
-            }
+        .coin-logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .change {
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: fit-content;
+        }
+
+        .change.up {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--primary);
+        }
+
+        .change.down {
+            background: rgba(255, 68, 68, 0.1);
+            color: #ff4444;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 2rem 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin: 0.5rem 0;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        /* PWA Install Button */
+        .install-button {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: var(--background);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
         }
     </style>
 </head>
@@ -230,114 +218,125 @@
     <header class="main-header">
         <nav class="nav-container">
             <div class="logo">CryptoLive</div>
-            <div class="social-links">
-                <a href="#" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
-                    </svg>
-                    <span>Sponsor</span>
-                </a>
-                <a href="#" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
-                    </svg>
-                    <span>GitHub</span>
-                </a>
-                <a href="#" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
-                    </svg>
-                    <span>Contact</span>
-                </a>
-            </div>
+            <button class="refresh-button" id="refreshButton">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M23 4v6h-6M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
         </nav>
     </header>
 
-    <main class="container">
-        <div class="refresh-container">
-            <button class="refresh-button" id="refresh-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21.5 2v6h-6M2.5 22v-6h6"/>
-                    <path d="M22 11.5A10 10 0 0 0 3.2 7.2M2 12.5a10 10 0 0 0 18.8 4.2"/>
-                </svg>
-                Refresh Data
-            </button>
-            <div class="time-update" id="time-update"></div>
-        </div>
-
-        <div class="grid" id="crypto-grid">
-            <!-- Data akan dimuat di sini -->
+    <main>
+        <div class="grid" id="cryptoGrid">
+            <!-- Crypto cards will be inserted here -->
         </div>
     </main>
 
-    <script>
-        const cryptocurrencies = ['bitcoin', 'ethereum', 'binancecoin', 'solana', 'cardano', 'ripple'];
-        const cryptoGrid = document.getElementById('crypto-grid');
-        const timeUpdate = document.getElementById('time-update');
-        const refreshButton = document.getElementById('refresh-button');
-        let isUpdating = false;
-
-        async function fetchCryptoPrices() {
-            if(isUpdating) return;
-            isUpdating = true;
-            refreshButton.disabled = true;
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Market Data</h4>
+                <ul class="footer-links">
+                    <li><a href="/prices">All Coins</a></li>
+                    <li><a href="/exchanges">Exchanges</a></li>
+                    <li><a href="/market-cap">Market Cap</a></li>
+                </ul>
+            </div>
             
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/api">API Docs</a></li>
+                    <li><a href="/support">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+                    <a href="#"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C6.477 2 2 6.463 2 11.97c0 4.404 2.865 8.14 6.839 9.458.5.092.682-.216.682-.48 0-.236-.008-.864-.013-1.695-2.782.602-3.369-1.337-3.369-1.337-.454-1.151-1.11-1.458-1.11-1.458-.908-.618.069-.606.069-.606 1.003.07 1.531 1.027 1.531 1.027.892 1.524 2.341 1.084 2.91.828.092-.643.35-1.083.636-1.332-2.22-.253-4.555-1.107-4.555-4.927 0-1.088.39-1.977 1.029-2.675-.103-.252-.446-1.266.098-2.638 0 0 .84-.268 2.75 1.022A9.606 9.606 0 0 1 12 6.82c.85.004 1.705.114 2.504.336 1.909-1.29 2.747-1.022 2.747-1.022.546 1.372.202 2.386.1 2.638.64.698 1.026 1.587 1.026 2.675 0 3.83-2.337 4.67-4.566 4.917.359.307.678.915.678 1.846 0 1.332-.012 2.407-.012 2.734 0 .267.18.577.688.48C19.137 20.107 22 16.373 22 11.969 22 6.463 17.522 2 12 2z"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="install-button" id="installButton">Install App</div>
+
+    <script>
+        // PWA Installation
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if(deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if(outcome === 'accepted') installButton.style.display = 'none';
+                deferredPrompt = null;
+            }
+        });
+
+        // Service Worker Registration
+        if('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // Crypto Data Fetching
+        const coins = ['bitcoin', 'ethereum', 'binancecoin', 'solana', 'cardano'];
+        const cryptoGrid = document.getElementById('cryptoGrid');
+        const refreshButton = document.getElementById('refreshButton');
+
+        async function fetchPrices() {
             try {
                 const response = await fetch(
-                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${cryptocurrencies.join(',')}&order=market_cap_desc`
+                    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coins.join(',')}&order=market_cap_desc`
                 );
-                
                 const data = await response.json();
-                cryptoGrid.innerHTML = '';
                 
-                data.forEach(coin => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    const price = new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                        minimumFractionDigits: 2
-                    }).format(coin.current_price);
-                    
-                    const priceChange = coin.price_change_percentage_24h.toFixed(2);
-                    const changeClass = priceChange >= 0 ? 'up' : 'down';
-                    
-                    card.innerHTML = `
+                cryptoGrid.innerHTML = data.map(coin => `
+                    <div class="card">
                         <div class="coin-header">
-                            <img src="${coin.image}" alt="${coin.name}" class="coin-logo">
+                            <img src="${coin.image}" class="coin-logo" alt="${coin.name} logo">
                             <div>
-                                <div class="coin-name">${coin.name}</div>
-                                <div class="coin-symbol">${coin.symbol.toUpperCase()}</div>
+                                <h3>${coin.name}</h3>
+                                <span>${coin.symbol.toUpperCase()}</span>
                             </div>
                         </div>
-                        <div class="price">${price}</div>
-                        <div class="change ${changeClass}">
-                            ${priceChange >= 0 ? '+' : ''}${priceChange}%
+                        <div class="price">$${coin.current_price.toLocaleString()}</div>
+                        <div class="change ${coin.price_change_percentage_24h >= 0 ? 'up' : 'down'}">
+                            ${coin.price_change_percentage_24h.toFixed(2)}%
                         </div>
-                    `;
-                    
-                    cryptoGrid.appendChild(card);
-                });
-
-                timeUpdate.textContent = `Last update: ${new Date().toLocaleTimeString()}`;
-                
+                    </div>
+                `).join('');
             } catch (error) {
-                cryptoGrid.innerHTML = `<div class="error">Failed to load data. Please try again later.</div>`;
-            } finally {
-                isUpdating = false;
-                refreshButton.disabled = false;
+                console.error('Error fetching data:', error);
+                cryptoGrid.innerHTML = '<div class="error">Failed to load data. Please try again later.</div>';
             }
         }
 
         // Initial load
-        fetchCryptoPrices();
+        fetchPrices();
         
-        // Auto-refresh setiap 30 detik
-        setInterval(fetchCryptoPrices, 30000);
-
+        // Auto-refresh every 30 seconds
+        setInterval(fetchPrices, 30000);
+        
         // Manual refresh
-        refreshButton.addEventListener('click', fetchCryptoPrices);
+        refreshButton.addEventListener('click', fetchPrices);
     </script>
 </body>
 </html>
