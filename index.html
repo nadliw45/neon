@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypt | Live Cryptocurrency Tracker</title>
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Track cryptocurrency prices in real-time with our retro pixel-style tracker. Data refreshes every 30 seconds from CoinGecko.">
+    <meta name="description" content="Track cryptocurrency prices in real-time with our retro pixel-style tracker. Data refreshes every 60 seconds from CoinGecko.">
     <meta name="keywords" content="cryptocurrency, bitcoin, ethereum, crypto prices, pixel art, retro crypto, crypto tracker">
     <meta name="author" content="Crypt">
     <meta property="og:title" content="Crypt | Live Cryptocurrency Tracker">
@@ -568,7 +568,7 @@
             <div class="timer-bar">
                 <div class="timer-progress" id="timerProgress"></div>
             </div>
-            <span id="timerText">30s</span>
+            <span id="timerText">60s</span>
         </div>
     </main>
     
@@ -576,7 +576,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3 class="footer-title">Crypt.web.id</h3>
-                <p style="font-size: 0.7rem;">Track cryptocurrency prices in real-time with our retro pixel-style tracker. Data refreshes every 30 seconds.</p>
+                <p style="font-size: 0.7rem;">Track cryptocurrency prices in real-time with our retro pixel-style tracker. Data refreshes every 60 seconds.</p>
                 <div class="social-links">
                     <a href="#" class="social-link">𝕏</a>
                     <a href="#" class="social-link">f</a>
@@ -809,7 +809,7 @@
         let timerInterval;
         function startRefreshTimer() {
             clearInterval(timerInterval);
-            let timeLeft = 30;
+            let timeLeft = 60;
             
             timerText.textContent = `${timeLeft}s`;
             timerProgress.style.width = '0%';
