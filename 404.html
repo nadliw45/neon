@@ -1,127 +1,390 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Crypto Page Not Found</title>
+    <title>404 - Halaman Tidak Ditemukan | Crypt - Live Harga Kripto</title>
+    <meta name="description" content="Halaman yang Anda cari tidak ditemukan. Kembali ke halaman utama Crypt untuk memantau harga cryptocurrency secara live.">
+    <meta property="og:title" content="404 - Halaman Tidak Ditemukan | Crypt">
+    <meta property="og:description" content="Halaman yang Anda cari tidak ditemukan. Kembali ke halaman utama Crypt.">
+    <meta property="og:url" content="https://crypt.web.id/404">
+    <link rel="canonical" href="https://crypt.web.id/404">
     <style>
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/VT323/1.3.2/VT323-Regular.ttf') format('truetype');
+        }
+
         :root {
-            --primary: #00ff88;
-            --background: #0a0a0a;
-            --surface: #1a1a1a;
-            --text: #ffffff;
+            --pixel-size: 3px;
+            --bg-color: #0d1117;
+            --text-color: #58FF00;
+            --header-color: #FF00E0;
+            --accent-color: #00A3FF;
+            --secondary-color: #FFF200;
+            --border-color: #3772FF;
+            --error-color: #FF5555;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'PixelFont', monospace;
         }
 
         body {
-            background: var(--background);
-            color: var(--text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            padding: 20px;
+            image-rendering: pixelated;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
+            max-width: 800px;
             text-align: center;
-            padding: 2rem;
+            padding: 40px 20px;
+            border: var(--pixel-size) solid var(--border-color);
             position: relative;
+            background-color: rgba(13, 17, 23, 0.8);
             z-index: 1;
         }
 
-        .crypto-glitch {
+        .error-code {
             font-size: 8rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary), #00b4d8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0, 255, 136, 0.2);
+            color: var(--error-color);
+            text-shadow: 
+                var(--pixel-size) var(--pixel-size) 0 var(--accent-color),
+                calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            margin-bottom: 20px;
             position: relative;
-            animation: glitch 2s infinite;
+            display: inline-block;
         }
 
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
-        }
-
-        .message {
-            font-size: 1.5rem;
-            margin: 2rem 0;
-            color: #888;
-        }
-
-        .back-button {
-            background: var(--surface);
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .back-button:hover {
-            background: var(--primary);
-            color: var(--background);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
-        }
-
-        .crypto-pattern {
+        .error-code::after {
+            content: "";
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                linear-gradient(45deg, transparent 48%, rgba(0, 255, 136, 0.1) 50%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(0, 255, 136, 0.1) 50%, transparent 52%);
-            background-size: 40px 40px;
-            opacity: 0.3;
-            animation: move 20s linear infinite;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, 
+                var(--header-color) 0%, 
+                var(--accent-color) 25%, 
+                var(--secondary-color) 50%,
+                var(--text-color) 75%, 
+                var(--error-color) 100%);
+            bottom: 0;
+            left: 0;
+            animation: rainbow 3s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            color: var(--header-color);
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .home-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: var(--pixel-size) solid var(--accent-color);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-button:hover {
+            background-color: var(--header-color);
+            border-color: var(--header-color);
+            transform: translateY(-5px);
+            box-shadow: 
+                var(--pixel-size) var(--pixel-size) 0 0 var(--accent-color),
+                calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 0 var(--secondary-color);
+        }
+
+        .home-button::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            top: 0;
+            left: 0;
+            animation: move 8s linear infinite;
         }
 
         @keyframes move {
-            0% { transform: translate(0, 0) }
-            100% { transform: translate(-50%, -50%) }
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
         }
 
-        @media (max-width: 768px) {
-            .crypto-glitch {
-                font-size: 5rem;
+        /* Error Graphic */
+        .error-graphic {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .broken-coin {
+            width: 150px;
+            height: 150px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            /* Create broken effect with clip-path */
+            clip-path: polygon(
+                0% 0%, 
+                45% 0%, 
+                45% 40%, 
+                55% 40%, 
+                55% 0%, 
+                100% 0%, 
+                100% 100%, 
+                55% 100%, 
+                55% 60%, 
+                45% 60%, 
+                45% 100%, 
+                0% 100%
+            );
+        }
+
+        .broken-coin::before {
+            content: "?";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: var(--bg-color);
+        }
+
+        /* Pixel animations */
+        .pixel-animation {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--text-color);
+            animation: float 10s infinite linear;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0.3;
             }
-            
-            .message {
-                font-size: 1.2rem;
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glitch animation for 404 */
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+                text-shadow: 
+                    var(--pixel-size) var(--pixel-size) 0 var(--accent-color),
+                    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            }
+            20% {
+                transform: translate(-5px, 5px);
+                text-shadow: 
+                    var(--pixel-size) var(--pixel-size) 0 var(--accent-color),
+                    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            }
+            40% {
+                transform: translate(5px, -5px);
+                text-shadow: 
+                    calc(-1 * var(--pixel-size)) var(--pixel-size) 0 var(--accent-color),
+                    calc(var(--pixel-size) * -2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            }
+            60% {
+                transform: translate(0);
+                text-shadow: 
+                    var(--pixel-size) var(--pixel-size) 0 var(--accent-color),
+                    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            }
+            80% {
+                transform: translate(3px, -3px);
+                text-shadow: 
+                    var(--pixel-size) calc(-1 * var(--pixel-size)) 0 var(--accent-color),
+                    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * -2) 0 var(--secondary-color);
+            }
+            100% {
+                transform: translate(0);
+                text-shadow: 
+                    var(--pixel-size) var(--pixel-size) 0 var(--accent-color),
+                    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--secondary-color);
+            }
+        }
+
+        .error-code {
+            animation: glitch 3s infinite;
+        }
+
+        /* Logo at top */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pixel-logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--header-color);
+            box-shadow: 
+                var(--pixel-size) var(--pixel-size) 0 0 var(--accent-color),
+                calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 0 var(--secondary-color);
+            margin-right: 15px;
+            position: relative;
+        }
+
+        .pixel-logo::before, .pixel-logo::after {
+            content: "";
+            position: absolute;
+            background-color: var(--bg-color);
+            width: 8px;
+            height: 8px;
+            top: 10px;
+        }
+
+        .pixel-logo::before {
+            left: 8px;
+        }
+
+        .pixel-logo::after {
+            right: 8px;
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            color: var(--header-color);
+            letter-spacing: 2px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-title {
+                font-size: 2rem;
+            }
+
+            .error-message {
+                font-size: 1.1rem;
+            }
+
+            .broken-coin {
+                width: 120px;
+                height: 120px;
+            }
+
+            .broken-coin::before {
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 20px 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="crypto-pattern"></div>
+    <!-- Pixel animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            createPixelAnimations();
+        });
+
+        function createPixelAnimations() {
+            const body = document.body;
+            const pixelCount = 30;
+            
+            for (let i = 0; i < pixelCount; i++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel-animation';
+                
+                // Random positions
+                const left = Math.random() * 100;
+                const size = 5 + Math.random() * 10;
+                const delay = Math.random() * 10;
+                const duration = 5 + Math.random() * 10;
+                
+                pixel.style.left = `${left}%`;
+                pixel.style.width = `${size}px`;
+                pixel.style.height = `${size}px`;
+                pixel.style.animationDelay = `${delay}s`;
+                pixel.style.animationDuration = `${duration}s`;
+                
+                // Random colors
+                const colors = ['var(--text-color)', 'var(--header-color)', 'var(--accent-color)', 'var(--secondary-color)', 'var(--error-color)'];
+                pixel.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                body.appendChild(pixel);
+            }
+        }
+    </script>
+
     <div class="container">
-        <div class="crypto-glitch">404</div>
-        <p class="message">Transaction not found in blockchain</p>
-        <a href="/" class="back-button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 12L21 12M3 12L9 18M3 12L9 6" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Back to Wallet
-        </a>
+        <div class="logo-container">
+            <div class="pixel-logo"></div>
+            <h1 class="site-title">Crypt</h1>
+        </div>
+        
+        <div class="error-graphic">
+            <div class="broken-coin"></div>
+        </div>
+        
+        <h2 class="error-code">404</h2>
+        <h3 class="error-title">Kripto Tidak Ditemukan!</h3>
+        <p class="error-message">Halaman yang Anda cari hilang dalam blockchain. Sepertinya Anda menambang di blok yang salah!</p>
+        
+        <a href="/" class="home-button">Kembali ke Homepage</a>
     </div>
 </body>
 </html>
