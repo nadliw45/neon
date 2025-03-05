@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio kripto pribadi dengan tampilan retro dan data real-time dari CoinGecko">
-    <meta name="keywords" content="kripto, portfolio, bitcoin, ethereum, solana, toncoin, retro">
-    <title>Privat Portofolio Kripto</title>
+    <meta name="description" content="Sejak 2012 das kapital telah berinvestasi dalam aset digital dan perusahaan blockchain, menyediakan informasi dengan spektrum penuh paparan ruang.">
+    <title>Das Kapital - Privat Portofolio Kripto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
-        
         :root {
-            --pastel-pink: #ffb6c1;
-            --pastel-blue: #add8e6;
-            --pastel-green: #98fb98;
-            --pastel-yellow: #fffacd;
-            --pastel-purple: #dda0dd;
+            --primary-bg: #f6e8ff;
+            --secondary-bg: #e0f3ff;
+            --accent-color: #ffb5da;
+            --text-color: #555b6e;
+            --header-color: #8e9aaf;
+            --card-bg: #feeafa;
+            --card-border: #cbc0d3;
+            --success-color: #b5ead7;
         }
         
         * {
@@ -24,482 +27,392 @@
         }
         
         body {
-            font-family: 'VT323', monospace;
-            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-pink), var(--pastel-green));
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-            font-size: 18px;
+            font-family: 'Space Mono', monospace;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50px 50px, var(--secondary-bg) 10px, transparent 10px),
+                radial-gradient(circle at 100px 100px, var(--accent-color) 8px, transparent 8px),
+                radial-gradient(circle at 150px 50px, var(--card-border) 6px, transparent 6px);
+            background-size: 200px 200px;
         }
         
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px dashed var(--accent-color);
+        }
+        
+        .logo {
+            font-family: 'VT323', monospace;
+            font-size: 2rem;
+            text-align: center;
+            color: var(--header-color);
+            text-shadow: 2px 2px var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: var(--accent-color);
+            border-color: var(--header-color);
+            color: white;
         }
         
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            border: 3px solid #333;
-        }
-        
-        header {
+            border: 3px solid var(--accent-color);
+            margin-bottom: 2rem;
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px dashed #333;
+            box-shadow: 8px 8px 0 var(--accent-color);
         }
         
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #333;
-            text-shadow: 2px 2px 0 var(--pastel-purple);
+        .hero h1 {
+            font-family: 'VT323', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--header-color);
         }
         
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .coin-card {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 3px 3px 0 #333;
-            border: 2px solid #333;
-            transition: transform 0.3s ease;
-        }
-        
-        .coin-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .coin-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-        
-        .coin-icon {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
-        
-        .coin-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .coin-data {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .data-item {
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 4px;
+        .hero p {
             font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .profit {
-            color: #28a745;
-        }
-        
-        .loss {
-            color: #dc3545;
-        }
-        
-        .summary {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 3px 3px 0 #333;
-            border: 2px solid #333;
-            margin-bottom: 20px;
-        }
-        
-        .summary h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            font-size: 1.5rem;
+        .section-title {
+            font-family: 'VT323', monospace;
+            font-size: 2rem;
             text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: var(--header-color);
         }
         
-        .pixel-btn {
-            background: var(--pastel-purple);
-            border: 2px solid #333;
-            box-shadow: 3px 3px 0 #333;
-            padding: 10px 15px;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #333;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto;
+            border-radius: 2px;
         }
         
-        .pixel-btn:hover {
-            transform: translate(1px, 1px);
-            box-shadow: 2px 2px 0 #333;
+        .about {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 3px solid var(--card-border);
+            margin-bottom: 2rem;
+            box-shadow: 5px 5px 0 var(--card-border);
         }
         
-        .pixel-btn:active {
-            transform: translate(3px, 3px);
-            box-shadow: none;
+        .portfolio {
+            margin-bottom: 2rem;
         }
         
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 3px dashed #333;
-            font-size: 0.9rem;
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
         
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .pixel-btn {
-                font-size: 0.7rem;
-                padding: 8px 12px;
-            }
+        .crypto-card {
+            background-color: var(--card-bg);
+            border: 3px solid var(--card-border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+            box-shadow: 5px 5px 0 var(--card-border);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Retro decoration elements */
-        .retro-stars {
-            position: fixed;
+        .crypto-card::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            height: 5px;
+            background-color: var(--accent-color);
         }
         
-        .star {
-            position: absolute;
-            background-color: #fff;
-            width: 3px;
-            height: 3px;
+        .crypto-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .crypto-name {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--header-color);
+        }
+        
+        .crypto-data {
+            margin-bottom: 0.5rem;
+        }
+        
+        .crypto-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--card-border);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--header-color);
+        }
+        
+        .stat-value {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        
+        .profit {
+            color: #4caf50;
+        }
+        
+        .footer {
+            background-color: var(--secondary-bg);
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 3px dashed var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            box-shadow: 3px 3px 0 var(--card-border);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: var(--header-color);
+        }
+        
+        .loader {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--accent-color);
             border-radius: 50%;
-            animation: twinkle 5s infinite;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
         }
         
-        @keyframes twinkle {
-            0% { opacity: 0.2; }
-            50% { opacity: 1; }
-            100% { opacity: 0.2; }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
         
-        .loading-dots:after {
-            content: '.';
-            animation: dots 1.5s steps(5, end) infinite;
+        .total-value {
+            background-color: var(--success-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 3px solid var(--header-color);
+            box-shadow: 5px 5px 0 var(--header-color);
         }
         
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60% { content: '...'; }
-            80%, 100% { content: ''; }
+        .total-label {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .total-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        
+        .price-change {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+        
+        .price-up {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #2e7d32;
+        }
+        
+        .price-down {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #c62828;
+        }
+        
+        .market-cap {
+            font-size: 0.9rem;
+            color: var(--header-color);
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .crypto-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Retro elements */
+        .pixel-border {
+            --mask: 
+                conic-gradient(from 180deg at top 0px right 0px, #0000 90deg,#000 0) 0 0 / 8px 8px,
+                conic-gradient(from 0deg at bottom 0px left 0px, #0000 90deg,#000 0) 0 0 / 8px 8px;
+            -webkit-mask: var(--mask);
+            mask: var(--mask);
+            padding: 8px;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        #lastUpdated {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--header-color);
         }
     </style>
 </head>
 <body>
-    <div class="retro-stars" id="stars"></div>
+    <header>
+        <div class="logo">⚡ DAS KAPITAL ⚡</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#portfolio">Portofolio</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
     
     <div class="container">
-        <header>
-            <h1>Privat Portofolio Kripto</h1>
-            <p>Portofolio kripto dengan statistik real-time dari CoinGecko</p>
-        </header>
+        <section id="home" class="hero">
+            <h1>Das Kapital - Privat Portofolio Kripto</h1>
+            <p>Sejak 2012 das kapital telah berinvestasi dalam aset digital dan perusahaan blockchain, menyediakan informasi dengan spektrum penuh paparan ruang.</p>
+        </section>
         
-        <div class="summary" id="summary">
-            <h2>Ringkasan Portofolio</h2>
-            <div id="summary-data">
+        <section id="about" class="about">
+            <h2 class="section-title">Tentang Kami</h2>
+            <p>Das Kapital adalah privat portofolio kripto, berdiri sejak 2012 mulai berinvestasi dalam dunia web3, dan terus mendukung kemajuan teknologi terdesentralisasi.</p>
+            <br>
+            <p>Kami berinvestasi dalam ide dan proyek tematik yang merupakan bagian infrastruktur inti dari ekosistem blockchain, seperti pertukaran, kustodian, alat perdagangan institusional, keuangan terdesentralisasi, sistem pembayaran gen berikutnya, dan banyak lagi.</p>
+        </section>
+        
+        <section id="portfolio" class="portfolio">
+            <h2 class="section-title">Portofolio Kripto</h2>
+            <div id="lastUpdated">Memperbarui data...</div>
+            
+            <div class="total-value">
+                <div class="total-label">Nilai Total Portofolio</div>
+                <div id="totalValue" class="total-amount">Memuat...</div>
+                <div id="totalProfit" class="market-cap">Memuat...</div>
+            </div>
+            
+            <div id="cryptoGrid" class="crypto-grid">
                 <div class="loading">
-                    <span class="loading-dots">Memuat data</span>
+                    <div class="loader"></div>
+                    <p>Memuat data kripto<span class="blink">...</span></p>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <div class="dashboard" id="dashboard">
-            <div class="loading">
-                <span class="loading-dots">Memuat data kripto</span>
+        <section id="contact" class="about">
+            <h2 class="section-title">Kontak</h2>
+            <p>Hubungi kami melalui sosial media:</p>
+            <div class="social-links">
+                <a href="https://twitter.com/daskapital" class="social-link">Twitter</a>
+                <a href="https://linkedin.com/daskapital" class="social-link">LinkedIn</a>
+                <a href="https://medium.com/daskapital" class="social-link">Medium</a>
             </div>
-        </div>
-        
-        <div style="text-align: center;">
-            <button class="pixel-btn" id="refresh-btn">Refresh Data</button>
-        </div>
-        
-        <footer>
-            <p>Data disediakan oleh CoinGecko API | Dibuat dengan ❤️ | © 2025</p>
-        </footer>
+        </section>
     </div>
-    
-    <script>
-        // Portfolio Data
-        const portfolio = {
-            bitcoin: {
-                id: 'bitcoin',
-                symbol: 'btc',
-                name: 'Bitcoin',
-                buyPrice: 16000,
-                amount: 1
-            },
-            ethereum: {
-                id: 'ethereum',
-                symbol: 'eth',
-                name: 'Ethereum',
-                buyPrice: 100,
-                amount: 10
-            },
-            solana: {
-                id: 'solana',
-                symbol: 'sol',
-                name: 'Solana',
-                buyPrice: 2,
-                amount: 100
-            },
-            'the-open-network': {
-                id: 'the-open-network',
-                symbol: 'ton',
-                name: 'Toncoin',
-                buyPrice: 0.2,
-                amount: 1000
-            }
-        };
-        
-        // Create stars for the background
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const numberOfStars = 100;
-            
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                starsContainer.appendChild(star);
-            }
-        }
-        
-        // Format currency
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value);
-        }
-        
-        // Format percentage
-        function formatPercentage(value) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'percent',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value / 100);
-        }
-        
-        // Fetch data from CoinGecko API
-        async function fetchCoinData() {
-            try {
-                const coinIds = Object.keys(portfolio).join(',');
-                const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds}&price_change_percentage=24h`);
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error fetching data from CoinGecko:', error);
-                return [];
-            }
-        }
-        
-        // Calculate portfolio metrics
-        function calculatePortfolioMetrics(coinsData) {
-            let totalInvestment = 0;
-            let totalCurrentValue = 0;
-            let bestPerformer = { profit: -Infinity };
-            let worstPerformer = { profit: Infinity };
-            
-            const updatedCoins = coinsData.map(coin => {
-                const portfolioCoin = portfolio[coin.id];
-                const investment = portfolioCoin.buyPrice * portfolioCoin.amount;
-                const currentValue = coin.current_price * portfolioCoin.amount;
-                const profit = currentValue - investment;
-                const profitPercentage = (profit / investment) * 100;
-                
-                totalInvestment += investment;
-                totalCurrentValue += currentValue;
-                
-                const coinData = {
-                    ...coin,
-                    ...portfolioCoin,
-                    investment,
-                    currentValue,
-                    profit,
-                    profitPercentage
-                };
-                
-                if (profitPercentage > bestPerformer.profit) {
-                    bestPerformer = {
-                        name: coin.name,
-                        profit: profitPercentage
-                    };
-                }
-                
-                if (profitPercentage < worstPerformer.profit) {
-                    worstPerformer = {
-                        name: coin.name,
-                        profit: profitPercentage
-                    };
-                }
-                
-                return coinData;
-            });
-            
-            const totalProfit = totalCurrentValue - totalInvestment;
-            const totalProfitPercentage = (totalProfit / totalInvestment) * 100;
-            
-            return {
-                coins: updatedCoins,
-                totalInvestment,
-                totalCurrentValue,
-                totalProfit,
-                totalProfitPercentage,
-                bestPerformer,
-                worstPerformer
-            };
-        }
-        
-        // Update UI with coin data
-        function updateCoinsUI(portfolioData) {
-            const dashboardEl = document.getElementById('dashboard');
-            dashboardEl.innerHTML = '';
-            
-            portfolioData.coins.forEach(coin => {
-                const profitClass = coin.profit >= 0 ? 'profit' : 'loss';
-                const profitSymbol = coin.profit >= 0 ? '↑' : '↓';
-                
-                const coinEl = document.createElement('div');
-                coinEl.classList.add('coin-card');
-                coinEl.innerHTML = `
-                    <div class="coin-header">
-                        <img src="${coin.image}" alt="${coin.name}" class="coin-icon">
-                        <div class="coin-name">${coin.name}</div>
-                    </div>
-                    <div class="coin-data">
-                        <div class="data-item">Harga Beli: ${formatCurrency(coin.buyPrice)}</div>
-                        <div class="data-item">Harga Kini: ${formatCurrency(coin.current_price)}</div>
-                        <div class="data-item">Jumlah: ${coin.amount} ${coin.symbol.toUpperCase()}</div>
-                        <div class="data-item ${profitClass}">Profit: ${profitSymbol} ${formatPercentage(coin.profitPercentage)}</div>
-                        <div class="data-item">Investasi: ${formatCurrency(coin.investment)}</div>
-                        <div class="data-item">Nilai Kini: ${formatCurrency(coin.currentValue)}</div>
-                    </div>
-                `;
-                
-                dashboardEl.appendChild(coinEl);
-            });
-        }
-        
-        // Update summary UI
-        function updateSummaryUI(portfolioData) {
-            const summaryDataEl = document.getElementById('summary-data');
-            const profitClass = portfolioData.totalProfit >= 0 ? 'profit' : 'loss';
-            const profitSymbol = portfolioData.totalProfit >= 0 ? '↑' : '↓';
-            
-            summaryDataEl.innerHTML = `
-                <div class="coin-data">
-                    <div class="data-item">Total Investasi: ${formatCurrency(portfolioData.totalInvestment)}</div>
-                    <div class="data-item">Nilai Kini: ${formatCurrency(portfolioData.totalCurrentValue)}</div>
-                    <div class="data-item ${profitClass}">Total Profit: ${profitSymbol} ${formatCurrency(portfolioData.totalProfit)} (${formatPercentage(portfolioData.totalProfitPercentage)})</div>
-                    <div class="data-item">Coin Terbaik: ${portfolioData.bestPerformer.name} (${formatPercentage(portfolioData.bestPerformer.profit)})</div>
-                    <div class="data-item">Coin Terburuk: ${portfolioData.worstPerformer.name} (${formatPercentage(portfolioData.worstPerformer.profit)})</div>
-                </div>
-                <p style="margin-top: 15px;">Terakhir diperbarui: ${new Date().toLocaleString()}</p>
-            `;
-        }
-        
-        // Update portfolio data
-        async function updatePortfolio() {
-            const dashboardEl = document.getElementById('dashboard');
-            const summaryDataEl = document.getElementById('summary-data');
-            
-            // Show loading state
-            dashboardEl.innerHTML = `<div class="loading"><span class="loading-dots">Memuat data kripto</span></div>`;
-            summaryDataEl.innerHTML = `<div class="loading"><span class="loading-dots">Memuat data</span></div>`;
-            
-            try {
-                const coinsData = await fetchCoinData();
-                
-                if (coinsData.length === 0) {
-                    throw new Error('No data received from CoinGecko');
-                }
-                
-                const portfolioData = calculatePortfolioMetrics(coinsData);
-                
-                updateCoinsUI(portfolioData);
-                updateSummaryUI(portfolioData);
-            } catch (error) {
-                console.error('Error updating portfolio:', error);
-                dashboardEl.innerHTML = `<div class="loading">Error: Gagal memuat data. Silakan coba lagi nanti.</div>`;
-                summaryDataEl.innerHTML = `<div class="loading">Error: Gagal memuat data. Silakan coba lagi nanti.</div>`;
-            }
-        }
-        
-        // Initialize the app
-        function init() {
-            createStars();
-            updatePortfolio();
-            
-            // Set up refresh button
-            document.getElementById('refresh-btn').addEventListener('click', updatePortfolio);
-            
-            // Auto refresh every 5 minutes
-            setInterval(updatePortfolio, 5 * 60 * 1000);
-        }
-        
-        // Start the app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
-</body>
-</html>
