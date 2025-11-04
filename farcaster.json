@@ -1,4 +1,7 @@
-
+{
+  "accountAssociation": { ... },
+  "miniapp": { ... },
   "baseBuilder": {
     "ownerAddress": "0x3203b291f384DE9109ae41F4fBE306d1Cea5Ad5d"
   }
+}
